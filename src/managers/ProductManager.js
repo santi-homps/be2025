@@ -21,7 +21,7 @@ class ProductManager {
     }
 
     async addProduct(product) {
-        // ... lógica para agregar un producto, incluyendo la generación del id ...
+        this.products.push(product)
         await this.saveProducts();
     }
 
@@ -33,13 +33,26 @@ class ProductManager {
         return this.products.find(product => product.id === id);
     }
 
-    async updateProduct(id, updatedFields) {
-        // ... lógica para actualizar un producto ...
+    async updateProduct(idToReplace, updatedProduct) {
+        const index = myArray.findIndex(item => item.id === idToReplace);
+
+        if (index !== -1) {
+        myArray[index] = updatedProduct;
+        } else {
+        console.error(`No se encontró ningún objeto con el ID ${idToReplace}`);
+        }
+
         await this.saveProducts();
     }
 
-    async deleteProduct(id) {
-        // ... lógica para eliminar un producto ...
+    async deleteProduct(idToRemove) {
+        const indexToRemove = this.products.findIndex(item => item.id === idToRemove);
+        
+        if (indexToRemove !== -1) {
+            this.products.splice(indexToRemove, 1);
+        } else {
+          console.error(`No se encontró ningún objeto con el ID ${idToRemove}`);
+        }
         await this.saveProducts();
     }
 }

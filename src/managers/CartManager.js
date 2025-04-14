@@ -37,7 +37,7 @@ class CartManager {
     async addProductToCart(cid, pid) {
         const cart = await this.getCartById(cid);
         if (!cart) {
-            return null; // Carrito no encontrado
+            return null;
         }
 
         const existingProduct = cart.products.find(item => item.product === pid);
