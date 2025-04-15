@@ -1,8 +1,13 @@
 import fs from 'fs/promises';
+import path from 'path';
+
+// const path = require('path');
+const pathProductos = path.join(__dirname, 'products.json');
 
 class ProductManager {
-    constructor(path) {
-        this.path = path;
+
+    constructor() {
+        this.path = pathProductos;
         this.products = [];
         this.loadProducts();
     }

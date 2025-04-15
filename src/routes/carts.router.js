@@ -2,11 +2,11 @@ import { Router } from 'express';
 import CartManager from '../managers/CartManager.js';
 
 const router = Router();
-const cartManager = new CartManager('src/data/carts.json');
+const cartMger = new CartManager('src/data/carts.json');
 
 router.post('/', async (req, res) => {
     try {
-        const newCart = await cartManager.createCart();
+        const newCart = await cartMger.createCart();
         res.status(201).json(newCart);
     } catch (error) {
         res.status(500).json({ error: 'Error al crear el carrito' });
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 router.get('/:cid', async (req, res) => {
     const cid = req.params.cid;
     try {
-        const cart = await cartManager.getCartById(cid);
+        const cart = await cartMger.getCartById(cid);
         if (cart) {
             res.json(cart.products);
         } else {
@@ -32,7 +32,7 @@ router.post('/:cid/product/:pid', async (req, res) => {
     const pid = req.params.pid;
 
     try {
-        const updatedCart = await cartManager.addProductToCart(cid, pid);
+        const updatedCart = await cartMger.addProductToCart(cid, pid);
         if (updatedCart) {
             res.json({ message: 'Producto agregado al carrito exitosamente', cart: updatedCart.products });
         } else {

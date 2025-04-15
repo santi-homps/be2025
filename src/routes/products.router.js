@@ -2,11 +2,11 @@ import { Router } from 'express';
 import ProductManager from '../managers/ProductManager.js';
 
 const router = Router();
-const productManager = new ProductManager('src/data/products.json');
+const prodMger = new ProductManager('src/data/products.json');
 
 router.get('/', async (req, res) => {
     try {
-        const products = await productManager.getProducts();
+        const products = await prodMger.getProducts();
         res.json(products);
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener los productos' });
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 router.get('/:pid', async (req, res) => {
     const pid = req.params.pid;
     try {
-        const product = await productManager.getProductById(pid);
+        const product = await prodMger.getProductById(pid);
         if (product) {
             res.json(product);
         } else {
@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
     };
 
     try {
-        await productManager.addProduct(newProduct);
+        await prodMger.addProduct(newProduct);
         res.status(201).json({ message: 'Producto agregado exitosamente' });
     } catch (error) {
         res.status(500).json({ error: 'Error al agregar el producto' });
@@ -58,7 +58,7 @@ router.put('/:pid', async (req, res) => {
     const updatedFields = req.body;
 
     try {
-        const updatedProduct = await productManager.updateProduct(pid, updatedFields);
+        const updatedProduct = await prodMger.updateProduct(pid, updatedFields);
         if (updatedProduct) {
             res.json({ message: 'Producto actualizado exitosamente' });
         } else {
@@ -72,7 +72,7 @@ router.put('/:pid', async (req, res) => {
 router.delete('/:pid', async (req, res) => {
     const pid = req.params.pid;
     try {
-        const deleted = await productManager.deleteProduct(pid);
+        const deleted = await prodMger.deleteProduct(pid);
         if (deleted) {
             res.json({ message: 'Producto eliminado exitosamente' });
         } else {
