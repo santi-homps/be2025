@@ -14,13 +14,13 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:pid', async (req, res) => {
-    const pid = req.params.pid;
+    const pid = Number(req.params.pid);
     try {
         const product = await prodMger.getProductById(pid);
         if (product) {
             res.json(product);
         } else {
-            res.status(404).json({ error: 'Producto no encontrado' });
+            res.status(404).json({ error: `Producto no encontrado ${typeof pid}` });
         }
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener el producto' });
