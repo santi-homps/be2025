@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:pid', async (req, res) => {
-    const pid = req.params.pid;
+    const pid = Number(req.params.pid);
     const updatedFields = req.body;
 
     try {
