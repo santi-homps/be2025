@@ -6,7 +6,7 @@ class ProductManager {
         this.path = path;
         this.products = [];
         this.loadProducts();
-        this.id = this.id++;
+        this.id = 0;
     }
 
     async loadProducts() {
@@ -23,6 +23,7 @@ class ProductManager {
     }
 
     async addProduct(product) {
+        this.id++;
         product.id = this.id;
         this.products.push(product)
         await this.saveProducts();
